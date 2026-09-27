@@ -256,6 +256,7 @@ Codex users also need `multi_agent = true` under `[features]` in `~/.codex/confi
 | `mcp` | MCP stdio server | `uv tool install "graphifyy[mcp]"` |
 | `neo4j` | Neo4j push support | `uv tool install "graphifyy[neo4j]"` |
 | `falkordb` | FalkorDB push support | `uv tool install "graphifyy[falkordb]"` |
+| `age` | Apache AGE (Postgres) push support | `uv tool install "graphifyy[age]"` |
 | `svg` | SVG graph export | `uv tool install "graphifyy[svg]"` |
 | `leiden` | Leiden community detection (graspologic on Python < 3.13; native backend on 3.13+) | `uv tool install "graphifyy[leiden]"` |
 | `ollama` | Ollama local inference | `uv tool install "graphifyy[ollama]"` |
@@ -934,6 +935,13 @@ is added to CI later. The Bandit and pip-audit CI steps currently use
 ### Git workflow
 
 - Active development happens on the `v8` branch.
+- **Fork → branch → PR to upstream.** Contributors work from a personal
+  fork whose `origin` points at their fork of `Graphify-Labs/graphify`; `v8`
+  is the active-development branch on both. Sync local `v8` to `origin/v8`
+  (which tracks upstream) before cutting a feature branch, then open the PR
+  from `<your-fork>:<feature-branch>` against `Graphify-Labs/graphify:v8`.
+- **One branch, one PR per feature** — carry each milestone as a separate
+  commit inside that branch rather than opening a PR per milestone.
 - Commit style: `fix: <description>` / `feat: <description>` / `docs: <description>`
 - Before opening a PR, run `uv run pytest tests/ -q` and confirm it passes.
 - Add a fixture file to `tests/fixtures/` and tests to `tests/test_languages.py` for any new language extractor.
